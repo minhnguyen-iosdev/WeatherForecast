@@ -7,7 +7,7 @@
 
 import Foundation
 
-class WeatherForecastViewModel {
+struct WeatherForecastViewModel: Hashable {
     let date: String
     let averageTemperature: String
     let pressure: String

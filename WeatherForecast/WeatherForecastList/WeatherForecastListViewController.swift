@@ -15,6 +15,7 @@ class WeatherForecastListViewController: UIViewController {
     
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var searchResultsTableView: UITableView!
+    lazy var searchResultsTableViewDataSource = makeDataSource()
     
     let items = [WeatherForecastViewModel(date: "Date: Mon, 04 May 2020",
                                           averageTemperature: "Average Temperature: 25C",
@@ -37,8 +38,8 @@ class WeatherForecastListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupViews()
+        updateSearchResultsTableViewDataSource()
     }
     
     func setupViews() {
@@ -49,24 +50,36 @@ class WeatherForecastListViewController: UIViewController {
     func setupSearchResultsTableView() {
         searchResultsTableView.register(UINib(nibName: String(describing: WeatherForecastCell.self), bundle: nil),
                                         forCellReuseIdentifier: String(describing: WeatherForecastCell.self))
-        searchResultsTableView.dataSource = self
+        searchResultsTableView.dataSource = searchResultsTableViewDataSource
         searchResultsTableView.estimatedRowHeight = Constants.estimatedRowHeight
     }
 }
 
-extension WeatherForecastListViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+extension WeatherForecastListViewController {
+    enum Section {
+        case main
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WeatherForecastCell.self),
-                                                       for: indexPath) as? WeatherForecastCell else {
-            return UITableViewCell()
-        }
-        
-        cell.setup(with: items[indexPath.row])
-        
-        return cell
+    func makeDataSource() -> UITableViewDiffableDataSource<Section, WeatherForecastViewModel> {
+        return UITableViewDiffableDataSource(
+            tableView: searchResultsTableView,
+            cellProvider: {  tableView, indexPath, viewModel in
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WeatherForecastCell.self),
+                                                               for: indexPath) as? WeatherForecastCell else {
+                    fatalError("Can't create a new WeatherForecastCell")
+                }
+                
+                cell.setup(with: viewModel)
+                
+                return cell
+            }
+        )
+    }
+    
+    func updateSearchResultsTableViewDataSource() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, WeatherForecastViewModel>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(items)
+        searchResultsTableViewDataSource.apply(snapshot, animatingDifferences: true)
     }
 }

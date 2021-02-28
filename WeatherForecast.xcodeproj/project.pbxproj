@@ -122,16 +122,12 @@
 		068FBF2325EA96260082A43B /* WeatherForecast */ = {
 			isa = PBXGroup;
 			children = (
+				068FBF8725EABB690082A43B /* WeatherForecastList */,
 				068FBF2425EA96260082A43B /* AppDelegate.swift */,
 				068FBF2625EA96260082A43B /* SceneDelegate.swift */,
 				068FBF2D25EA96280082A43B /* Assets.xcassets */,
 				068FBF2F25EA96280082A43B /* LaunchScreen.storyboard */,
 				068FBF3225EA96280082A43B /* Info.plist */,
-				068FBF6225EA9BD20082A43B /* WeatherForecastListViewController.swift */,
-				068FBF6325EA9BD20082A43B /* WeatherForecastListViewController.xib */,
-				068FBF7825EAAB4B0082A43B /* WeatherForecastCell.swift */,
-				068FBF7925EAAB4B0082A43B /* WeatherForecastCell.xib */,
-				068FBF7F25EAB2000082A43B /* WeatherForecastViewModel.swift */,
 			);
 			path = WeatherForecast;
 			sourceTree = "<group>";
@@ -152,6 +148,26 @@
 				068FBF4825EA96290082A43B /* Info.plist */,
 			);
 			path = WeatherForecastUITests;
+			sourceTree = "<group>";
+		};
+		068FBF8725EABB690082A43B /* WeatherForecastList */ = {
+			isa = PBXGroup;
+			children = (
+				068FBF8825EABB780082A43B /* WeatherForecastCell */,
+				068FBF6225EA9BD20082A43B /* WeatherForecastListViewController.swift */,
+				068FBF6325EA9BD20082A43B /* WeatherForecastListViewController.xib */,
+			);
+			path = WeatherForecastList;
+			sourceTree = "<group>";
+		};
+		068FBF8825EABB780082A43B /* WeatherForecastCell */ = {
+			isa = PBXGroup;
+			children = (
+				068FBF7825EAAB4B0082A43B /* WeatherForecastCell.swift */,
+				068FBF7925EAAB4B0082A43B /* WeatherForecastCell.xib */,
+				068FBF7F25EAB2000082A43B /* WeatherForecastViewModel.swift */,
+			);
+			path = WeatherForecastCell;
 			sourceTree = "<group>";
 		};
 		2891F75F069C5A865866CF8E /* Pods */ = {
