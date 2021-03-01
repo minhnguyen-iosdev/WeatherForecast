@@ -11,7 +11,6 @@
 		068FBF2725EA96260082A43B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068FBF2625EA96260082A43B /* SceneDelegate.swift */; };
 		068FBF2E25EA96280082A43B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 068FBF2D25EA96280082A43B /* Assets.xcassets */; };
 		068FBF3125EA96280082A43B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 068FBF2F25EA96280082A43B /* LaunchScreen.storyboard */; };
-		068FBF3C25EA96290082A43B /* WeatherForecastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068FBF3B25EA96290082A43B /* WeatherForecastTests.swift */; };
 		068FBF4725EA96290082A43B /* WeatherForecastUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068FBF4625EA96290082A43B /* WeatherForecastUITests.swift */; };
 		068FBF6425EA9BD20082A43B /* WeatherForecastListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068FBF6225EA9BD20082A43B /* WeatherForecastListViewController.swift */; };
 		068FBF6525EA9BD20082A43B /* WeatherForecastListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068FBF6325EA9BD20082A43B /* WeatherForecastListViewController.xib */; };
@@ -26,6 +25,7 @@
 		068FBFBE25ED2EFF0082A43B /* WeatherForecastListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068FBFBD25ED2EFF0082A43B /* WeatherForecastListViewModel.swift */; };
 		068FBFCA25ED47450082A43B /* WeatherForecastListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068FBFC925ED47450082A43B /* WeatherForecastListViewModelTests.swift */; };
 		068FBFE425ED4A250082A43B /* MockOpenWeatherMapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068FBFE325ED4A250082A43B /* MockOpenWeatherMapService.swift */; };
+		068FBFEF25ED57E80082A43B /* OpenWeatherMapServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068FBFEE25ED57E80082A43B /* OpenWeatherMapServiceTests.swift */; };
 		51EF560F7E4262F6EE514C20 /* Pods_WeatherForecast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67E1FB5212D3462E4E0DA506 /* Pods_WeatherForecast.framework */; };
 		E9153F8E02677659913ED593 /* Pods_WeatherForecastTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5F82E90B4266CCBC2C2A5D0 /* Pods_WeatherForecastTests.framework */; };
 		EFCEAB22214A9362FFFBB7CF /* Pods_WeatherForecast_WeatherForecastUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4630FD36584C66B9AD99B3D /* Pods_WeatherForecast_WeatherForecastUITests.framework */; };
@@ -56,7 +56,6 @@
 		068FBF3025EA96280082A43B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		068FBF3225EA96280082A43B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		068FBF3725EA96290082A43B /* WeatherForecastTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherForecastTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		068FBF3B25EA96290082A43B /* WeatherForecastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastTests.swift; sourceTree = "<group>"; };
 		068FBF3D25EA96290082A43B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		068FBF4225EA96290082A43B /* WeatherForecastUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherForecastUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		068FBF4625EA96290082A43B /* WeatherForecastUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastUITests.swift; sourceTree = "<group>"; };
@@ -74,6 +73,7 @@
 		068FBFBD25ED2EFF0082A43B /* WeatherForecastListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastListViewModel.swift; sourceTree = "<group>"; };
 		068FBFC925ED47450082A43B /* WeatherForecastListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastListViewModelTests.swift; sourceTree = "<group>"; };
 		068FBFE325ED4A250082A43B /* MockOpenWeatherMapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockOpenWeatherMapService.swift; sourceTree = "<group>"; };
+		068FBFEE25ED57E80082A43B /* OpenWeatherMapServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherMapServiceTests.swift; sourceTree = "<group>"; };
 		633612A449DFC4F57DD90239 /* Pods-WeatherForecast-WeatherForecastUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherForecast-WeatherForecastUITests.release.xcconfig"; path = "Target Support Files/Pods-WeatherForecast-WeatherForecastUITests/Pods-WeatherForecast-WeatherForecastUITests.release.xcconfig"; sourceTree = "<group>"; };
 		66CF65699218A5155D09BE4C /* Pods-WeatherForecast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherForecast.release.xcconfig"; path = "Target Support Files/Pods-WeatherForecast/Pods-WeatherForecast.release.xcconfig"; sourceTree = "<group>"; };
 		67E1FB5212D3462E4E0DA506 /* Pods_WeatherForecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherForecast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,10 +153,10 @@
 		068FBF3A25EA96290082A43B /* WeatherForecastTests */ = {
 			isa = PBXGroup;
 			children = (
-				068FBFE225ED4A160082A43B /* Mock */,
-				068FBF3B25EA96290082A43B /* WeatherForecastTests.swift */,
-				068FBF3D25EA96290082A43B /* Info.plist */,
 				068FBFC925ED47450082A43B /* WeatherForecastListViewModelTests.swift */,
+				068FBFEE25ED57E80082A43B /* OpenWeatherMapServiceTests.swift */,
+				068FBFE225ED4A160082A43B /* Mock */,
+				068FBF3D25EA96290082A43B /* Info.plist */,
 			);
 			path = WeatherForecastTests;
 			sourceTree = "<group>";
@@ -509,8 +509,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				068FBFCA25ED47450082A43B /* WeatherForecastListViewModelTests.swift in Sources */,
+				068FBFEF25ED57E80082A43B /* OpenWeatherMapServiceTests.swift in Sources */,
 				068FBFE425ED4A250082A43B /* MockOpenWeatherMapService.swift in Sources */,
-				068FBF3C25EA96290082A43B /* WeatherForecastTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
