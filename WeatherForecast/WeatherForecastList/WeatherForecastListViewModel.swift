@@ -22,6 +22,11 @@ protocol WeatherForecastListViewModelOutput {
 }
 
 class DefaultWeatherForecastListViewModel: WeatherForecastListViewModel {
+    struct Constants {
+        static let searchThrottleInterval = 300
+        static let minNumberOfCharsToSearch = 3
+    }
+    
     struct Input: WeatherForecastListViewModelInput {
         let searchText = PublishRelay<String>()
     }
@@ -40,9 +45,9 @@ class DefaultWeatherForecastListViewModel: WeatherForecastListViewModel {
         let items = BehaviorRelay<[WeatherForecastViewModel]>(value: [])
         
         input.searchText
-            .filter { $0.count >= 3 }
+            .filter { $0.count >= Constants.minNumberOfCharsToSearch }
             .map { $0.lowercased() }
-            .throttle(.milliseconds(300), scheduler: scheduler)
+            .throttle(.milliseconds(Constants.searchThrottleInterval), scheduler: scheduler)
             .distinctUntilChanged()
             .flatMapLatest { text -> Observable<Result<DailyForecastList, Error>> in
                 openWeatherMapService.getWeatherForecast(withQuery: text)
