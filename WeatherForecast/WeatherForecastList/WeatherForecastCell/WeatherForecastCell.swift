@@ -16,6 +16,11 @@ class WeatherForecastCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        dateLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        averageTemperatureLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        pressureLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        humidityLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        descriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
     }
     
     func setup(with viewModel: WeatherForecastViewModel) {
