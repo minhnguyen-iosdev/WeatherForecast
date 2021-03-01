@@ -17,7 +17,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let window = UIWindow(windowScene: windowScene)
         
-        let weatherForecastListViewController = WeatherForecastListViewController()
+        let openWeatherMapService = DefaultOpenWeatherMapService()
+        let viewModel = DefaultWeatherForecastListViewModel(openWeatherMapService: openWeatherMapService)
+        let weatherForecastListViewController = WeatherForecastListViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: weatherForecastListViewController)
         window.rootViewController = navigationController
         

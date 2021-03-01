@@ -20,21 +20,11 @@ class WeatherForecastListViewController: UIViewController {
     lazy var searchResultsTableViewDataSource = makeDataSource()
     let openWeatherMapService: OpenWeatherMapService = DefaultOpenWeatherMapService()
     
-    let searchText = BehaviorRelay<String>(value: "")
+    let viewModel: WeatherForecastListViewModel
     let disposeBag = DisposeBag()
     
-    var items = [WeatherForecastViewModel(date: "Date: Mon, 04 May 2020",
-                                          averageTemperature: "Average Temperature: 25C",
-                                          pressure: "1020",
-                                          humidity: "49%",
-                                          description: "sky is clear"),
-                 WeatherForecastViewModel(date: "Date: Tue, 05 May 2020",
-                                          averageTemperature: "Average Temperature: 27C",
-                                          pressure: "1060",
-                                          humidity: "53%",
-                                          description: "sky is clear")]
-    
-    init() {
+    init(viewModel: WeatherForecastListViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: String(describing: type(of: self)), bundle: nil)
     }
     
@@ -45,34 +35,7 @@ class WeatherForecastListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        updateSearchResultsTableViewDataSource()
-        
-        searchText
-            .filter { $0.count >= 3 }
-            .debug("@@@", trimOutput: true)
-            .flatMapLatest { [unowned self] text -> Observable<Result<DailyForecastList, Error>> in
-                self.openWeatherMapService.getWeatherForecast(withQuery: text)
-            }
-            .subscribe(onNext: { [unowned self] result in
-                switch result {
-                case let .success(dailyForecastList):
-                    var newItems = [WeatherForecastViewModel]()
-                    for item in dailyForecastList.list {
-                        let viewModel = WeatherForecastViewModel(date: item.date.description,
-                                                                 averageTemperature: String(item.temperature.min),
-                                                                 pressure: String(item.pressure),
-                                                                 humidity: String(item.humidity),
-                                                                 description: String(item.weathers[0].description))
-                        newItems.append(viewModel)
-                    }
-    
-                    self.items = newItems
-                    self.updateSearchResultsTableViewDataSource()
-                default: break
-                }
-                
-            })
-            .disposed(by: disposeBag)
+        bindViewModel()
     }
     
     func setupViews() {
@@ -86,6 +49,14 @@ class WeatherForecastListViewController: UIViewController {
                                         forCellReuseIdentifier: String(describing: WeatherForecastCell.self))
         searchResultsTableView.dataSource = searchResultsTableViewDataSource
         searchResultsTableView.estimatedRowHeight = Constants.estimatedRowHeight
+    }
+    
+    func bindViewModel() {
+        viewModel.output.items
+            .subscribe(onNext: { [unowned self] items in
+                self.updateSearchResultsTableView(with: items)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -110,7 +81,7 @@ extension WeatherForecastListViewController {
         )
     }
     
-    func updateSearchResultsTableViewDataSource() {
+    func updateSearchResultsTableView(with items: [WeatherForecastViewModel]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, WeatherForecastViewModel>()
         snapshot.appendSections([.main])
         snapshot.appendItems(items)
@@ -120,6 +91,6 @@ extension WeatherForecastListViewController {
 
 extension WeatherForecastListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.searchText.accept(searchText)
+        viewModel.input.searchText.accept(searchText)
     }
 }

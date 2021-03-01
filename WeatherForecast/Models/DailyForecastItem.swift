@@ -8,7 +8,7 @@
 import Foundation
 
 struct DailyForecastItem: Codable {
-    let date: Date
+    let date: Int
     let pressure: Int
     let humidity: Int
     let weathers: [Weather]
