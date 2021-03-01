@@ -35,13 +35,14 @@ class DefaultWeatherForecastListViewModel: WeatherForecastListViewModel {
     
     let disposeBag = DisposeBag()
     
-    init(openWeatherMapService: OpenWeatherMapService) {
+    init(openWeatherMapService: OpenWeatherMapService,
+         scheduler: SchedulerType = MainScheduler.instance) {
         let items = BehaviorRelay<[WeatherForecastViewModel]>(value: [])
         
         input.searchText
             .filter { $0.count >= 3 }
             .map { $0.lowercased() }
-            .throttle(.milliseconds(300), scheduler: MainScheduler.instance)
+            .throttle(.milliseconds(300), scheduler: scheduler)
             .distinctUntilChanged()
             .flatMapLatest { text -> Observable<Result<DailyForecastList, Error>> in
                 openWeatherMapService.getWeatherForecast(withQuery: text)

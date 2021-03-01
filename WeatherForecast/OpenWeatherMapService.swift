@@ -59,7 +59,7 @@ class DefaultOpenWeatherMapService: OpenWeatherMapService {
                 if 200 ..< 300 ~= httpResponse.statusCode {
                     let decoder = JSONDecoder()
                     let _dailyForcast = try? decoder.decode(DailyForecastList.self, from: data)
-                    let dailyForcast = _dailyForcast ?? DailyForecastList(cod: "", message: 0, cnt: 0, list: [])
+                    let dailyForcast = _dailyForcast ?? DailyForecastList(list: [])
                     observer.onNext(.success(dailyForcast))
                 }
                 else {

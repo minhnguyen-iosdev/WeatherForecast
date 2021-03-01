@@ -18,8 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         
         let openWeatherMapService = DefaultOpenWeatherMapService()
-        let viewModel = DefaultWeatherForecastListViewModel(openWeatherMapService: openWeatherMapService)
-        let weatherForecastListViewController = WeatherForecastListViewController(viewModel: viewModel)
+        let weatherForecastListViewModel = DefaultWeatherForecastListViewModel(openWeatherMapService: openWeatherMapService)
+        let weatherForecastListViewController = WeatherForecastListViewController(viewModel: weatherForecastListViewModel)
+        
         let navigationController = UINavigationController(rootViewController: weatherForecastListViewController)
         window.rootViewController = navigationController
         
@@ -54,7 +55,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
 

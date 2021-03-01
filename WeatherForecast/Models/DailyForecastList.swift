@@ -8,8 +8,5 @@
 import Foundation
 
 struct DailyForecastList: Codable {
-    let cod: String
-    let message: Double
-    let cnt: Int
     let list: [DailyForecastItem]
 }
