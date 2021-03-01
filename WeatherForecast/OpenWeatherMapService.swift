@@ -38,7 +38,11 @@ class DefaultOpenWeatherMapService: OpenWeatherMapService {
         }
         
         return Observable<Result<DailyForecastList, Error>>.create { observer in
-            let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, response, error in
+            let urlRequest = URLRequest(url: url,
+                                        cachePolicy: .returnCacheDataElseLoad,
+                                        timeoutInterval: TimeInterval(300))
+            
+            let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
                 
                 guard let response = response, let data = data else {
                     observer.onNext(.failure(error ?? NSError()))
