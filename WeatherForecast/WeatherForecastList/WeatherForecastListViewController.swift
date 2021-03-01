@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class WeatherForecastListViewController: UIViewController {
     struct Constants {
@@ -16,8 +18,12 @@ class WeatherForecastListViewController: UIViewController {
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var searchResultsTableView: UITableView!
     lazy var searchResultsTableViewDataSource = makeDataSource()
+    let openWeatherMapService: OpenWeatherMapService = DefaultOpenWeatherMapService()
     
-    let items = [WeatherForecastViewModel(date: "Date: Mon, 04 May 2020",
+    let searchText = BehaviorRelay<String>(value: "")
+    let disposeBag = DisposeBag()
+    
+    var items = [WeatherForecastViewModel(date: "Date: Mon, 04 May 2020",
                                           averageTemperature: "Average Temperature: 25C",
                                           pressure: "1020",
                                           humidity: "49%",
@@ -40,10 +46,38 @@ class WeatherForecastListViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         updateSearchResultsTableViewDataSource()
+        
+        searchText
+            .filter { $0.count >= 3 }
+            .debug("@@@", trimOutput: true)
+            .flatMapLatest { [unowned self] text -> Observable<Result<DailyForecastList, Error>> in
+                self.openWeatherMapService.getWeatherForecast(withQuery: text)
+            }
+            .subscribe(onNext: { [unowned self] result in
+                switch result {
+                case let .success(dailyForecastList):
+                    var newItems = [WeatherForecastViewModel]()
+                    for item in dailyForecastList.list {
+                        let viewModel = WeatherForecastViewModel(date: item.date.description,
+                                                                 averageTemperature: String(item.temperature.min),
+                                                                 pressure: String(item.pressure),
+                                                                 humidity: String(item.humidity),
+                                                                 description: String(item.weathers[0].description))
+                        newItems.append(viewModel)
+                    }
+    
+                    self.items = newItems
+                    self.updateSearchResultsTableViewDataSource()
+                default: break
+                }
+                
+            })
+            .disposed(by: disposeBag)
     }
     
     func setupViews() {
         title = Constants.screenTitle
+        searchBar.delegate = self
         setupSearchResultsTableView()
     }
     
@@ -81,5 +115,11 @@ extension WeatherForecastListViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(items)
         searchResultsTableViewDataSource.apply(snapshot, animatingDifferences: true)
+    }
+}
+
+extension WeatherForecastListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.searchText.accept(searchText)
     }
 }

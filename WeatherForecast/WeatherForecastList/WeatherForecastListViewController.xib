@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WeatherForecastListViewController" customModule="WeatherForecast" customModuleProvider="target">
             <connections>
-                <outlet property="searchBar" destination="MyY-6u-jz2" id="WZn-qW-gOI"/>
+                <outlet property="searchBar" destination="MyY-6u-jz2" id="m5t-jZ-gop"/>
                 <outlet property="searchResultsTableView" destination="JHz-n2-z2W" id="vUo-wO-6oj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
