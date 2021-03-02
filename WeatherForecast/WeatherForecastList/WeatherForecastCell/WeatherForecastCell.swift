@@ -23,6 +23,15 @@ class WeatherForecastCell: UITableViewCell {
         descriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        dateLabel.text = nil
+        averageTemperatureLabel.text = nil
+        pressureLabel.text = nil
+        humidityLabel.text = nil
+        descriptionLabel.text = nil
+    }
+    
     func setup(with viewModel: WeatherForecastViewModel) {
         dateLabel.text = viewModel.date
         averageTemperatureLabel.text = viewModel.averageTemperature
